@@ -22,7 +22,7 @@ function App() {
 
       <div>
         <Row>
-          <Card style={{ width: '18rem' }}>
+          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', marginRight: "10px"}}>
             <Card.Body>
               <Card.Title>Weather</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -35,7 +35,7 @@ function App() {
             </Card.Body>
           </Card>
 
-          <Card style={{ width: '18rem' }}>
+          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px'}}>
             <Card.Body>
               <Card.Title>Crops infected</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -49,8 +49,10 @@ function App() {
           </Card>
         </Row>
 
+        <br></br>
+
         <Row>
-          <Card style={{ width: '18rem' }}>
+          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', marginRight: "10px"}}>
             <Card.Body>
               <Card.Title>My Crop</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -62,8 +64,8 @@ function App() {
               <Card.Link href="#">Another Link</Card.Link>
             </Card.Body>
           </Card>
-
-          <Card style={{ width: '18rem' }}>
+          
+          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px'}}>
             <Card.Body>
               <Card.Title>Buttons</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
