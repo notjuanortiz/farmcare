@@ -3,7 +3,7 @@ FROM python:3.7-slim
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-RUN pip install pipenv
+RUN pip install --no-cache-dir pipenv
 
 # create /home/app directory in container
 RUN mkdir -p /home/app
