@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import farmcare_logo from '../assets/farmcare_logo.PNG';
+import {Link} from "react-router-dom";
 import {
   Navbar,
   Container,
@@ -30,9 +31,11 @@ function MainNavbar() {
               </Offcanvas.Header>
               <Offcanvas.Body style={{backgroundColor: "#015249"}}>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="#action1"><h4 style={{color: "#ffffff"}}>Home</h4></Nav.Link>
-                  <Nav.Link href="#action2"><h4 style={{color: "#ffffff"}}>About</h4></Nav.Link>
-                  <Nav.Link href="#action3"><h4 style={{color: "#ffffff"}}>Contact</h4></Nav.Link>
+                  <Link to="/" ><h5>Home</h5></Link>
+                  <Link to="/" ><h5>About</h5></Link>
+                  <Link to="/" ><h5>Contact</h5></Link>
+                  <Link to="/sign-up" ><h5>Sign Up</h5></Link>
+                  <Link to="/login" ><h5>Sign Up</h5></Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
