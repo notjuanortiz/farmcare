@@ -14,7 +14,7 @@ function App() {
       <MainNavbar></MainNavbar>
 
       <Container>
-        <Row>
+        <Row className="justify-content-md-center">
           <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
             <Card.Body>
               <Card.Title>Weather</Card.Title>
@@ -44,7 +44,7 @@ function App() {
 
         <br></br>
 
-        <Row>
+        <Row className="justify-content-md-center">
           <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
             <Card.Body>
               <Card.Title>My Crop</Card.Title>
