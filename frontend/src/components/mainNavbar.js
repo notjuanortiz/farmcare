@@ -5,7 +5,6 @@ import {
   Navbar,
   Container,
   Offcanvas,
-  NavDropdown,
   Nav,
 } from 'react-bootstrap';
 
@@ -35,7 +34,7 @@ function MainNavbar() {
                   <Link to="/" ><h5>About</h5></Link>
                   <Link to="/" ><h5>Contact</h5></Link>
                   <Link to="/sign-up" ><h5>Sign Up</h5></Link>
-                  <Link to="/login" ><h5>Sign Up</h5></Link>
+                  <Link to="/login" ><h5>Login</h5></Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
