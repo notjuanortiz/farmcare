@@ -8,12 +8,12 @@ import {
   Nav,
 } from 'react-bootstrap';
 
-function MainNavbar() {
+const MainNavbar = () => {
     return (
       <div>
         <Navbar style={{backgroundColor: '#57BC90'}} expand={false}>
           <Container fluid>
-            <Navbar.Brand href="#">
+            <Navbar.Brand href="/">
               <div style={{display: 'flex'}}>
               <img style={{width: '50px', height: '50px'}} src={farmcare_logo} alt="logo" />
               <h1 style={{color: '#015249'}}>farmCare</h1>
