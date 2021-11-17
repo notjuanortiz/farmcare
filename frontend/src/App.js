@@ -2,16 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  Navbar,
   Container,
-  Offcanvas,
-  NavDropdown,
-  Form,
-  Button,
-  FormControl,
-  Nav,
   Card,
-  Row
+  Row,
 } from 'react-bootstrap';
 import MainNavbar from './components/mainNavbar';
 
@@ -20,9 +13,9 @@ function App() {
     <div className="App">    
       <MainNavbar></MainNavbar>
 
-      <div>
+      <Container>
         <Row>
-          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', marginRight: "10px"}}>
+          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
             <Card.Body>
               <Card.Title>Weather</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -35,7 +28,7 @@ function App() {
             </Card.Body>
           </Card>
 
-          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px'}}>
+          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
             <Card.Body>
               <Card.Title>Crops infected</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -52,7 +45,7 @@ function App() {
         <br></br>
 
         <Row>
-          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', marginRight: "10px"}}>
+          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
             <Card.Body>
               <Card.Title>My Crop</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -65,7 +58,7 @@ function App() {
             </Card.Body>
           </Card>
           
-          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px'}}>
+          <Card style={{width: '18rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
             <Card.Body>
               <Card.Title>Buttons</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -78,7 +71,7 @@ function App() {
             </Card.Body>
           </Card>
         </Row>
-      </div>
+      </Container>
     </div>
   );
 }

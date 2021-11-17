@@ -11,12 +11,12 @@ import {
 function MainNavbar() {
     return (
       <div>
-        <Navbar style={{backgroundColor: "#57BC90"}} expand={false}>
+        <Navbar style={{backgroundColor: '#57BC90'}} expand={false}>
           <Container fluid>
             <Navbar.Brand href="#">
-              <div>
+              <div style={{display: 'flex'}}>
               <img style={{width: '50px', height: '50px'}} src={farmcare_logo} alt="logo" />
-              <h1 style={{color: "#015249"}}>farmCare</h1>
+              <h1 style={{color: '#015249'}}>farmCare</h1>
               </div>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
