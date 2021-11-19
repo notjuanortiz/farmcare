@@ -11,7 +11,7 @@ import {
 const MainNavbar = () => {
     return (
       <div>
-        <Navbar style={{backgroundColor: '#57BC90'}} expand={false}>
+        <Navbar className='mb-5' style={{backgroundColor: '#57BC90'}} expand={false}>
           <Container fluid>
             <Navbar.Brand href="/">
               <div style={{display: 'flex'}}>
@@ -40,7 +40,6 @@ const MainNavbar = () => {
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-        <br></br>
         </div>
   );
 }

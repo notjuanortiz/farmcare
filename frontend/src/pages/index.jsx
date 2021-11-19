@@ -10,6 +10,7 @@ import {
   Button
 } from 'react-bootstrap';
 import MainNavbar from '../components/mainNavbar';
+import WeatherWidget from "../components/weatherWidget";
 import CropCarouselWidget from "../components/cropCarouselWidget";
 
 const Home = () => {
@@ -20,24 +21,15 @@ const Home = () => {
           <Container>
             <Row className="justify-content-md-center">
               <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
-                <Card.Body>
-                  <Card.Title>Weather</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                  </Card.Text>
-                  <Card.Link href="#">Card Link</Card.Link>
-                  <Card.Link href="#">Another Link</Card.Link>
-                </Card.Body>
+                <WeatherWidget></WeatherWidget>
               </Card>
     
               <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
                 <Card.Body>
                     <Card.Title>
-                      <div style={{fontSize: '100px', color: '#57BC90'}}>13</div>
+                      <div style={{fontSize: '100px', color: '#015249'}}>13</div>
                     </Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">crops have been infected</Card.Subtitle>
+                    <Card.Subtitle style={{fontSize: '20px', color: '#015249'}}>crops have been infected</Card.Subtitle>
                 </Card.Body>
               </Card>
             </Row>
@@ -47,7 +39,7 @@ const Home = () => {
             <Row className="justify-content-md-center">
               <Card style={{width: '25rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
                 <Card.Body>
-                  <Card.Title>My Crop</Card.Title>
+                  <Card.Title style={{color: '#015249'}}>My Crop</Card.Title>
                   <CropCarouselWidget></CropCarouselWidget>
                 </Card.Body>
               </Card>

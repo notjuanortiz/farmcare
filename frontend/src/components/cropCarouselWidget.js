@@ -12,7 +12,7 @@ import {
 const CropCarouselWidget = () => {
     return (
       <div>
-       Carousel Widget
+       [Carousel Widget]
       </div>
     );
 }
