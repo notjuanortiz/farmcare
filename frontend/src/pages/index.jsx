@@ -12,6 +12,7 @@ import {
 import MainNavbar from '../components/mainNavbar';
 import WeatherWidget from "../components/weatherWidget";
 import CropCarouselWidget from "../components/cropCarouselWidget";
+import Upload from "../components/imageUpload";
 import { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 
@@ -69,6 +70,10 @@ const Home = () => {
             <Card style={{borderWidth: '0px', width: '15rem', margin: "10px"}}>
                 <Card.Body>
                     <div className='mb-3'>
+                        <Upload></Upload>
+                    </div>
+                    
+                    <div className='mb-3'>
                         {isCaptureEnable || (
                             <Button variant="success" size="lg" onClick={() => setCaptureEnable(true)}>Open Camera</Button>
                         )}
@@ -87,13 +92,13 @@ const Home = () => {
                                 videoConstraints={videoConstraints}
                                 />
                             </div>
-                            <Button variant="success" size="lg" onClick={capture}>Capture</Button>
+                            <Button variant="success" size="lg" className='mb-3' onClick={capture}>Capture</Button>
                             </>
                         )}
                         {url && (
                             <>
                             <div>
-                                <Button variant="success" size="lg"
+                                <Button variant="success" size="lg" className='mb-3'
                                     onClick={() => {
                                         setUrl(null);
                                     }}
