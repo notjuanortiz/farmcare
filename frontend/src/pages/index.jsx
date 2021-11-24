@@ -12,8 +12,26 @@ import {
 import MainNavbar from '../components/mainNavbar';
 import WeatherWidget from "../components/weatherWidget";
 import CropCarouselWidget from "../components/cropCarouselWidget";
+import { useRef, useState, useCallback } from "react";
+import Webcam from "react-webcam";
+
+const videoConstraints = {
+    width: 720,
+    height: 360,
+    facingMode: "user"
+  };
 
 const Home = () => {
+    const [isCaptureEnable, setCaptureEnable] = useState(null);
+    const webcamRef = useRef(null);
+    const [url, setUrl] = useState(null);
+    const capture = useCallback(() => {
+        const imageSrc = webcamRef.current?.getScreenshot();
+        if (imageSrc) {
+        setUrl(imageSrc);
+        }
+    }, [webcamRef]);    
+
       return (
         <div className="App">    
           <MainNavbar></MainNavbar>
@@ -44,12 +62,50 @@ const Home = () => {
                 </Card.Body>
               </Card>
               
-              <Card style={{borderWidth: '0px', width: '15rem', margin: "10px"}}>
+              
+            </Row>
+
+            <Row>
+            <Card style={{borderWidth: '0px', width: '15rem', margin: "10px"}}>
                 <Card.Body>
                     <div className='mb-3'>
-                        <Button variant="success" size="lg">
-                            Upload crop photo
-                        </Button>  
+                        {isCaptureEnable || (
+                            <Button variant="success" size="lg" onClick={() => setCaptureEnable(true)}>Open Camera</Button>
+                        )}
+                        {isCaptureEnable && (
+                            <>
+                            <div>
+                                <Button variant="success" size="lg" onClick={() => setCaptureEnable(false)}>Close Camera</Button>
+                            </div>
+                            <div>
+                                <Webcam
+                                audio={false}
+                                width={540}
+                                height={360}
+                                ref={webcamRef}
+                                screenshotFormat="image/jpeg"
+                                videoConstraints={videoConstraints}
+                                />
+                            </div>
+                            <Button variant="success" size="lg" onClick={capture}>Capture</Button>
+                            </>
+                        )}
+                        {url && (
+                            <>
+                            <div>
+                                <Button variant="success" size="lg"
+                                    onClick={() => {
+                                        setUrl(null);
+                                    }}
+                                >
+                                    Remove photo
+                                </Button>
+                            </div>
+                            <div>
+                                <img src={url} alt="Screenshot" />
+                            </div>
+                            </>
+                        )}
                     </div>
 
                     <div>
