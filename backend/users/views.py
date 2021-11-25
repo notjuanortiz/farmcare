@@ -1,8 +1,7 @@
-from rest_framework import viewsets
-
-from users.serializers import UserSerializer
+from rest_framework.viewsets import ModelViewSet
+from users.serializers import FarmcareRegisterSerializer
 from users.models import FarmcareUser
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(ModelViewSet):
     queryset = FarmcareUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = FarmcareRegisterSerializer
