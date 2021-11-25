@@ -1,8 +1,9 @@
 from django.db import models
 # Create your models here.
 
-def crop_image_directory(instance, filename):
-    return 'images/crop_{0}/{1}'.format(instance.crop.name, filename)
+# Images should be stored into the database but we're storing them locally due to time constraints
+def crop_image_directory(instance, filename: str):
+    return 'images/crop_{0}/{1}'.format(instance.name, filename.lower())
 
 class Crop(models.Model):
     name = models.CharField(max_length=30)
