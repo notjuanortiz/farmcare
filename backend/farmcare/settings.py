@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +54,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'farmcare.urls'
@@ -99,6 +111,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+     ],
+     'DEFAULT_PERMISSIONS_CLASSES' : [
+        'rest_framework.permissions.AllowAny'
+     ],
+}
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'farmcare-auth'
+JWT_AUTH_REFRESH_COOKIE = 'farmcare-auth-refresh-token'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
