@@ -5,6 +5,7 @@ import {
   Button,
   Form
 } from 'react-bootstrap';
+import '../styles/cropProfile.css';
 
 const CropProfile = () => {
   return (
@@ -12,19 +13,14 @@ const CropProfile = () => {
         <MainNavbar></MainNavbar>
     
         <Container style={{width: '500px'}}>
-            <div>
+            <div class="crop-profile">
                 <img 
                     src="https://www.ocregister.com/wp-content/uploads/2020/07/iStock-1132371208-1.jpg?w=1569"
                     width="300px"
                     height="200px"
-                    className="mb-3"
                 />
 
                 <h2 style={{color: '#015249'}}>Tomato</h2>
-
-                <p>
-                    <em>“A class should have one, and only one reason to change.”</em>
-                </p>
 
                 <p>
                     Ideally every class should have one specific purpose and thus they should have very specific names. The name of your class 
