@@ -7,6 +7,7 @@ import {
 import HomePage from "./pages"
 import SignUpPage from "./pages/signUpPage"
 import LoginPage from "./pages/loginPage"
+import CropProfile from "./pages/cropProfile"
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route exact path="/" ><HomePage /></Route>
         <Route path="/sign-up"><SignUpPage /></Route>
         <Route path="/login"><LoginPage /></Route>
+        <Route path="/crop-profile"><CropProfile /></Route>
       </Switch>
     </Router>
   );

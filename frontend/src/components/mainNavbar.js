@@ -35,6 +35,7 @@ const MainNavbar = () => {
                   <Link to="/" ><h5>Contact</h5></Link>
                   <Link to="/sign-up" ><h5>Sign Up</h5></Link>
                   <Link to="/login" ><h5>Login</h5></Link>
+                  <Link to="/crop-profile" ><h5>Crop Profile</h5></Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
