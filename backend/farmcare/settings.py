@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from typing import Optional
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,13 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
     'rest_framework',
     'rest_framework.authtoken',
-    'dj_rest_auth.registration',
+    'dj_rest_auth',
+
     'allauth',
     'allauth.account',
+    'dj_rest_auth.registration',
+    
     'core',
+    'users',
+    'crops',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,9 +129,34 @@ REST_FRAMEWORK = {
      ],
 }
 
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER' : 'users.serializers.FarmcareUserDetailsSerializer',
+    #'PASSWORD_RESET_SERIALIZER' : 'users.serializers.FarmcarePasswordResetSerializer'
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER' : 'users.serializers.FarmcareRegisterSerializer',
+}
+
+ACCOUNT_ADAPTER = 'users.adapter.FarmcareUserAdapter'
+AUTH_USER_MODEL = 'users.FarmcareUser'
+
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
+
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'farmcare-auth'
-JWT_AUTH_REFRESH_COOKIE = 'farmcare-auth-refresh-token'
+JWT_AUTH_REFRESH_COOKIE = 'farmcare-refresh-token'
+
+ATHENTICATION_BACKENDS = [
+    # Enabled to login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+    # Enabled to log into admin panel using username
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
