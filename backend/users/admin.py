@@ -13,7 +13,7 @@ class FarmcareUserAdmin(UserAdmin):
                     'zipcode', 'date_joined',)
     list_filter = ('email', 'is_staff', 'is_active', 'zipcode', 'date_joined',)
     fieldsets = (
-        (None, {'fields': ['first_name', 'last_name', 'email', 'password', ]}),
+        (None, {'fields': ['first_name', 'last_name', 'email', 'zipcode', 'password', ]}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
     add_fieldsets = (
