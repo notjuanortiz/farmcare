@@ -1,5 +1,4 @@
 import { BehaviorSubject } from 'rxjs';
-import { handleResponse } from '../helpers/handle-response';
 
 const API_URL = "http://localhost:8000/";
 
