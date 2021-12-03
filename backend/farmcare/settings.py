@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-cdplnc%*6r4u8m=gbn22ut$o2s7d2-(!2yd9*hh@9drxp6xp+w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1'
+    ]
 
 
 # Application definition
@@ -39,14 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
-
+    'dj_rest_auth.registration',
     'allauth',
     'allauth.account',
-    'dj_rest_auth.registration',
+    'corsheaders',
     
     'core',
     'users',
@@ -68,7 +70,11 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:8000'
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'farmcare.urls'
 
@@ -141,22 +147,20 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 ACCOUNT_ADAPTER = 'users.adapter.FarmcareUserAdapter'
 AUTH_USER_MODEL = 'users.FarmcareUser'
 
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
 
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'farmcare-auth'
-JWT_AUTH_REFRESH_COOKIE = 'farmcare-refresh-token'
 
-ATHENTICATION_BACKENDS = [
+ATHENTICATION_BACKENDS = (
     # Enabled to login by email
     'allauth.account.auth_backends.AuthenticationBackend',
     # Enabled to log into admin panel using username
     'django.contrib.auth.backends.ModelBackend',
-]
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
