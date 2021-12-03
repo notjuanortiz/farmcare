@@ -1,11 +1,11 @@
 import { authenticationService } from "../services/authentication.service";
 
 export function authHeader() {
-    const user = authenticationService.currentUser;
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    if (user && user.token) {
+    if (user && user.accessToken) {
         return {
-            Authorization: `Bearer ${user.token}`
+            Authorization: `Bearer ${user.accessToken}`
         };
     } else {
         return {};
