@@ -8,10 +8,10 @@ def crop_image_directory(instance, filename: str):
 class Crop(models.Model):
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to=crop_image_directory)
-
+    companion = models.ManyToManyField('crops.Crop', related_name='crops')
     class Meta:
-        verbose_name_plural = 'crops'
         ordering = ['name']
+        db_table = 'crops'
 
     def __str__(self):
         return self.name

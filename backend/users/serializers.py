@@ -2,7 +2,6 @@ from rest_framework import serializers
 from dj_rest_auth.serializers import UserDetailsSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from users.models import FarmcareUser
-from crops.models import Crop 
 
 class FarmcareRegisterSerializer(RegisterSerializer):
     zipcode = serializers.IntegerField(required = False)
@@ -21,4 +20,12 @@ class FarmcareUserDetailsSerializer(UserDetailsSerializer):
         'zipcode',
         'crops'
         )
-    read_only_fields = ('pk','email','zipcode',)
+    read_only_fields = ('pk')
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FarmcareUser
+        fields = [
+            'first_name',
+            'crops',
+        ]
