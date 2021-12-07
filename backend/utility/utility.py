@@ -1,7 +1,8 @@
 import smtplib
 from email.message import EmailMessage
+# import requests
 
-def email_alert(subject, body, to):
+def emailAlert(subject, body, to):
     msg = EmailMessage()
     msg.set_content(body) 
     msg['subject'] = subject
@@ -18,7 +19,7 @@ def email_alert(subject, body, to):
     
     server.quit()
     
-if __name__ == '__main__':
-    # email_alert("Hey","Hello Word", "ananaziz98@gmail.com")
-    email_alert("Hey","wine", "6234194111@tmomail.net")
+# if __name__ == '__main__':
+    # emailAlert("Hey","Dont cheat", "xhajabx@gmail.com")
+    # emailAlert("Hey","wine", "3475533214@tmomail.net")
     
