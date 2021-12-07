@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from typing import Optional
-
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1'
-    ]
+]
 
 
 # Application definition
@@ -49,7 +48,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'corsheaders',
-    
+
     'core',
     'users',
     'crops',
@@ -129,19 +128,19 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-     ],
-     'DEFAULT_PERMISSIONS_CLASSES' : [
+    ],
+    'DEFAULT_PERMISSIONS_CLASSES': [
         'rest_framework.permissions.AllowAny'
-     ],
+    ],
 }
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER' : 'users.serializers.FarmcareUserDetailsSerializer',
-    #'PASSWORD_RESET_SERIALIZER' : 'users.serializers.FarmcarePasswordResetSerializer'
+    'USER_DETAILS_SERIALIZER': 'users.serializers.FarmcareUserDetailsSerializer',
+    # 'PASSWORD_RESET_SERIALIZER' : 'users.serializers.FarmcarePasswordResetSerializer'
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER' : 'users.serializers.FarmcareRegisterSerializer',
+    'REGISTER_SERIALIZER': 'users.serializers.FarmcareRegisterSerializer',
 }
 
 ACCOUNT_ADAPTER = 'users.adapter.FarmcareUserAdapter'
@@ -154,7 +153,11 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
 REST_USE_JWT = True
-
+JWT_AUTH = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=20),
+    'ROTATE_REFRESH_TOKENS' : False,
+}
 ATHENTICATION_BACKENDS = (
     # Enabled to login by email
     'allauth.account.auth_backends.AuthenticationBackend',
