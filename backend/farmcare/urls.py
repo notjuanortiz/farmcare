@@ -18,7 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from users.views import UserViewSet
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+from users.views import UserDashboardView
 from crops.views import CropViewSet
 
 # Loads admin.py for all apps
@@ -27,13 +32,15 @@ admin.autodiscover()
 
 router = DefaultRouter()
 router.register(r'crops', CropViewSet)
-router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('allauth.urls')),
     url(r'auth/', include('dj_rest_auth.urls')),
     url(r'auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('dashboard', UserDashboardView.as_view(), name='dashboard')
 ]
 
 urlpatterns += router.urls
