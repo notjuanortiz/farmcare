@@ -1,6 +1,5 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import logo from '../logo.svg';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -38,35 +37,29 @@ const Home = () => {
           <MainNavbar></MainNavbar>
     
           <Container>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center mb-4">
               <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
                 <WeatherWidget></WeatherWidget>
               </Card>
-    
-              <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
-                <Card.Body>
-                    <Card.Title>
-                      <div style={{fontSize: '100px', color: '#015249'}}>13</div>
-                    </Card.Title>
-                    <Card.Subtitle style={{fontSize: '20px', color: '#015249'}}>crops have been infected</Card.Subtitle>
-                </Card.Body>
-              </Card>
-            </Row>
-    
-            <br></br>
-    
-            <Row className="justify-content-md-center">
+
               <Card style={{width: '25rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
                 <Card.Body>
                   <Card.Title style={{color: '#015249'}}>My Crop</Card.Title>
                   <CropCarouselWidget></CropCarouselWidget>
                 </Card.Body>
               </Card>
-              
-              
+    
+              {/* <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
+                <Card.Body>
+                    <Card.Title>
+                      <div style={{fontSize: '100px', color: '#015249'}}>13</div>
+                    </Card.Title>
+                    <Card.Subtitle style={{fontSize: '20px', color: '#015249'}}>crops have been infected</Card.Subtitle>
+                </Card.Body>
+              </Card> */}
             </Row>
 
-            <Row>
+            <Row className="justify-content-md-center">
             <Card style={{borderWidth: '0px', width: '15rem', margin: "10px"}}>
                 <Card.Body>
                     <div className='mb-3'>
