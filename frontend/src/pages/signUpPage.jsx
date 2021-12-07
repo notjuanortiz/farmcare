@@ -6,8 +6,17 @@ import {
   Form,
   InputGroup
 } from 'react-bootstrap';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useState } from "react";
 
 const SignUpPage = () => {
+
+  const [submit, setSubmit] = useState(false);
+
+  function onChange(value) {
+    setSubmit(true);
+  }
+
   return (
     <div>
       <MainNavbar></MainNavbar>
@@ -44,9 +53,17 @@ const SignUpPage = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
-                <Button variant="success" type="submit">
-                    Submit
-                </Button>
+                
+                <div className="App">
+                  <ReCAPTCHA
+                    sitekey="6LeYyoMdAAAAAGF90MQe9mj_oAIZcdWNFP8_opwv"
+                    onChange={onChange}
+                  />
+                </div>
+
+                <div>
+                  { submit ? <Button className="mt-2" variant="success" type="submit">Submit</Button> : null }
+                </div>
             </Form>
         </Container>
     </div>

@@ -45,6 +45,8 @@ class UserCrop(models.Model):
     crop = models.ForeignKey(Crop, on_delete=CASCADE)
     user_submitted_image = models.ImageField()
 
+    def __str__(self):
+        return self.email
     class Meta:
         constraints = [
             # composite key constraint
