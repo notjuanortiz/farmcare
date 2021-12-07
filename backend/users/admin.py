@@ -1,14 +1,16 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
-from users.forms import FarmcareUserCreationForm, FarmcareUserChangeForm
-from users.models import FarmcareUser
+#from users.forms import FarmcareUserCreationForm, FarmcareUserChangeForm
+from users.models import FarmcareUser, UserCrop
 
-
+class CropInline(admin.StackedInline):
+    model = UserCrop
 class FarmcareUserAdmin(UserAdmin):
-    add_form = FarmcareUserCreationForm
-    form = FarmcareUserChangeForm
     model = FarmcareUser
+    inlines = [
+        CropInline
+    ]
     list_display = ('email', 'is_staff', 'is_active',
                     'zipcode', 'date_joined',)
     list_filter = ('email', 'is_staff', 'is_active', 'zipcode', 'date_joined',)
