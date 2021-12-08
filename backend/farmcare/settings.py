@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'core',
     'users',
     'crops',
+    'alerts',
 ]
 
 SITE_ID = 1
