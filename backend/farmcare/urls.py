@@ -23,7 +23,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from users.views import UserDashboardView, UserViewSet
+from alerts.views import CreateEmailAlertView
+from users.views import UserDashboardView
 from crops.views import CropViewSet
 
 # Loads admin.py for all apps
@@ -39,7 +40,8 @@ urlpatterns = [
     url(r'auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('dashboard/', UserDashboardView.as_view(), name='user_dashboard')
+    path('dashboard', UserDashboardView.as_view(), name='dashboard'),
+    path('alerts/email/', CreateEmailAlertView.as_view(), name='alert_email')
 ]
 
 urlpatterns += router.urls
