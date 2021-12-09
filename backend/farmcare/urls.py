@@ -22,6 +22,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+
 from alerts.views import CreateEmailAlertView
 from users.views import UserDashboardView
 from crops.views import CropViewSet
@@ -35,7 +36,6 @@ router.register(r'crops', CropViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^account/', include('allauth.urls')),
     url(r'auth/', include('dj_rest_auth.urls')),
     url(r'auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

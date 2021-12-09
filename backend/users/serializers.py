@@ -9,23 +9,22 @@ class FarmcareRegisterSerializer(RegisterSerializer):
     def get_cleaned_data(self):
         data_dict = super().get_cleaned_data()
         data_dict['zipcode'] = self.validated_data.get('zipcode')
-        data_dict['crops'] = self.validated_data.get('crops')
         return data_dict
 
 class FarmcareUserDetailsSerializer(UserDetailsSerializer):
     model = FarmcareUser
-    fields = (
-        'pk',
-        'email',
-        'zipcode',
-        'crops'
-        )
-    read_only_fields = ('pk')
+    fields = ('pk','email')
+    read_only_fields = ('pk', 'email')
 
 class UserSerializer(serializers.ModelSerializer):
+    '''
+    Serializes our user model when accessing '/users'
+    '''
     class Meta:
         model = FarmcareUser
-        fields = [
+        fields = [ # The fields to display
+            'pk',
             'first_name',
             'crops',
+            'zipcode'
         ]
