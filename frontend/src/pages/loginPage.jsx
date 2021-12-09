@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 const LoginPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [validate, setValidate] = useState(false);
   const history = useHistory();
   const onChangeEmail = (e) => {
     const email = e.target.value;
@@ -25,8 +26,15 @@ const LoginPage = () => {
   const authenticate = (e) => {
     e.preventDefault();
     AuthenticationService.login(email, password)
-      .then(() => {
-        history.push("/");
+      .then(function (response) {
+        let resp = response.status;
+        console.log("response code: ", resp);
+        if(resp != '200') {
+          history.push("/home-page");
+        }
+        else {
+          setValidate(true);
+        }
       });
   };
 
@@ -35,7 +43,7 @@ const LoginPage = () => {
       <MainNavbar></MainNavbar>
 
       <Container style={{ width: '500px' }}>
-        <Form onSubmit={authenticate}>
+        <Form noValidate validated={true} onSubmit={authenticate} className="invalid">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" onChange={onChangeEmail} />
@@ -44,6 +52,7 @@ const LoginPage = () => {
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" onChange={onChangePassword} />
+            { validate ? <div className="text-danger">Email and password do not match.</div> : <></> }
           </Form.Group>
           <Button variant="success" type="submit">
             Submit

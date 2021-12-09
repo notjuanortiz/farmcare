@@ -1,118 +1,70 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link,  useHistory} from "react-router-dom";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   Container,
   Card,
   Row,
-  Button
+  Button,
+  Table
 } from 'react-bootstrap';
 import MainNavbar from '../components/mainNavbar';
-import WeatherWidget from "../components/weatherWidget";
-import CropCarouselWidget from "../components/cropCarouselWidget";
-import Upload from "../components/imageUpload";
-import { useRef, useState, useCallback } from "react";
-import Webcam from "react-webcam";
 
-const videoConstraints = {
-    width: 720,
-    height: 360,
-    facingMode: "user"
-  };
-
-const Home = () => {
-    const [isCaptureEnable, setCaptureEnable] = useState(null);
-    const webcamRef = useRef(null);
-    const [url, setUrl] = useState(null);
-    const capture = useCallback(() => {
-        const imageSrc = webcamRef.current?.getScreenshot();
-        if (imageSrc) {
-        setUrl(imageSrc);
-        }
-    }, [webcamRef]);    
+const LandingPage = () => { 
 
       return (
         <div className="App">    
           <MainNavbar></MainNavbar>
     
           <Container>
-            <Row className="justify-content-md-center mb-4">
-              <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
-                <WeatherWidget></WeatherWidget>
-              </Card>
+           <h1 className="mb-4">Manage, Discover, Grow</h1>
+           <div style={{width: "50%", margin: "auto"}}>
+              Our goal at FarmCare is to provide an all-in-one application that makes farming 
+              more efficient, improves yield, and delivers increased profit. Our approach is 
+              different as we are helping local farmers get started by using Machine Learning 
+              and Computer Vision. With these technologies, FarmCare is there to educate 
+              farmers about their crop and help increase annual yield by providing key insights
+               that can be leveraged quickly and efficiently. These insights are delivered to 
+               the farmers via timely smart alerts that allow them to make better real time 
+               decisions and maximize profit. And it’s all done through a simple, beautiful,
+                and easy-to-use interface. 
+           </div>
 
-              <Card style={{width: '25rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
-                <Card.Body>
-                  <Card.Title style={{color: '#015249'}}>My Crop</Card.Title>
-                  <CropCarouselWidget></CropCarouselWidget>
-                </Card.Body>
-              </Card>
-    
-              {/* <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
-                <Card.Body>
-                    <Card.Title>
-                      <div style={{fontSize: '100px', color: '#015249'}}>13</div>
-                    </Card.Title>
-                    <Card.Subtitle style={{fontSize: '20px', color: '#015249'}}>crops have been infected</Card.Subtitle>
-                </Card.Body>
-              </Card> */}
-            </Row>
+           <Link to="/sign-up" className="btn btn-lg btn-success mt-3 mb-5 m-1">Sign up</Link>
+           <Link to="/login" className="btn btn-lg btn-success mt-3 mb-5 m-1">Login</Link>
 
-            <Row className="justify-content-md-center">
-              <div className='mb-3'>
-                  <Button variant="success" size="lg">
-                      Profile Settings
-                  </Button>  
-              </div>
-              
-              <div className='mb-3'>
-                  {isCaptureEnable || (
-                      <Button variant="success" size="lg" onClick={() => setCaptureEnable(true)}>Open Camera</Button>
-                  )}
-                  {isCaptureEnable && (
-                      <>
-                      <div>
-                          <Button variant="success" size="lg" onClick={() => setCaptureEnable(false)}>Close Camera</Button>
-                      </div>
-                      <div>
-                          <Webcam
-                          audio={false}
-                          width={540}
-                          height={360}
-                          ref={webcamRef}
-                          screenshotFormat="image/jpeg"
-                          videoConstraints={videoConstraints}
-                          />
-                      </div>
-                      <Button variant="success" size="lg" className='mb-3' onClick={capture}>Capture</Button>
-                      </>
-                  )}
-                  {url && (
-                      <>
-                      <div>
-                          <Button variant="success" size="lg" className='mb-3'
-                              onClick={() => {
-                                  setUrl(null);
-                              }}
-                          >
-                              Remove photo
-                          </Button>
-                      </div>
-                      <div>
-                          <img src={url} alt="Screenshot" />
-                      </div>
-                      </>
-                  )}
-              </div> 
-
-              <div className='mb-3'>
-                  <Upload></Upload>
-              </div>
-            </Row>
+           <Table borderless style={{width: "50%", margin: "auto"}} className="mt-5">
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="text-muted">Farm more acres of land</div>
+                  </td>
+                  <td>
+                    <div className="text-muted">Spend less time learning</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div className="text-muted">Improve yields and profitability</div>
+                  </td>
+                  <td>
+                    <div className="text-muted">Make wiser decisions and stay ahead of competition</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div className="text-muted">Identify upcoming weather problems before they affect yield</div>
+                  </td>
+                  <td>
+                    <div className="text-muted">Save time and gain peace of mind</div>
+                  </td>
+                </tr>  
+              </tbody>
+            </Table>
           </Container>
         </div>
       );
     }
 
-export default Home;
+export default LandingPage;
