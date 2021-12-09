@@ -26,13 +26,13 @@ const LoginPage = () => {
   const authenticate = (e) => {
     e.preventDefault();
     AuthenticationService.login(email, password)
-      .then(() => {
-        history.push("/");        
-      })
       .then(function (response) {
         let resp = response.status;
         console.log("response code: ", resp);
         if(resp != '200') {
+          history.push("/home-page");
+        }
+        else {
           setValidate(true);
         }
       });
