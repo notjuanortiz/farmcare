@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from dj_rest_auth.serializers import UserDetailsSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from users.models import FarmcareUser
+from users.models import FarmcareUser, UserCrop
 
 class FarmcareRegisterSerializer(RegisterSerializer):
     zipcode = serializers.IntegerField(required = False)
@@ -27,4 +27,14 @@ class UserSerializer(serializers.ModelSerializer):
             'first_name',
             'crops',
             'zipcode'
+        ]
+
+class UserCropSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source='crop.name')
+    image_url = serializers.CharField(source='user_submitted_image')
+    class Meta:
+        model = UserCrop
+        fields = [
+            'name',
+            'image_url'
         ]
