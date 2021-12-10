@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 const LoginPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [validate, setValidate] = useState(false);
+  const [validate, setValidate] = useState(true);
   const history = useHistory();
   const onChangeEmail = (e) => {
     const email = e.target.value;

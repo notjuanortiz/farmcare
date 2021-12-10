@@ -41,6 +41,22 @@ const WeatherWidget = () => {
       });
   });
 
+  if(temp < 40) {
+    const auth_token = localStorage.getItem("access");
+    fetch('http://localhost:8000/alerts', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: auth_token
+      },
+      body: {
+        body: `Alert! The temperature dropped to 40 degree farenheit.
+         Please keep in mind that this temperature is hazardous for most plants.`,
+        to: "ananaziz98@gmail.com"
+      }
+    })
+  }
+
   return (
     <div>
         <Card.Body>
