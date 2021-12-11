@@ -25,16 +25,16 @@ const LoginPage = () => {
 
   const authenticate = (e) => {
     e.preventDefault();
-    let resp = AuthenticationService.login(email, password)
-    .then(() => {
-      console.log("what is code ",resp);
-      if(resp != '200') {
-        history.push("/home-page");
-      }
-      else {
-        setValidate(true);
-      }
-    })
+    AuthenticationService.login(email, password)
+      .then((resp) => {
+        const status = resp.status;
+        if(status == '200') {
+          history.push("/home-page");
+        }
+        else {
+          setValidate(true);
+        }
+      });
   };
 
   return (

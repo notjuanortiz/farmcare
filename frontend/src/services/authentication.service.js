@@ -26,19 +26,15 @@ async function login(email, password) {
   };
 
   const response = await fetch(API_URL + "api/token/", requestOptions)
-  .then(() => {
-    const json = response.json();
-    if (json.access) {
+  const json = await response.json();
+  if (json.access) {
     localStorage.setItem('access-token', json.access);
     localStorage.setItem('refresh-token', json.refresh);
     currentUserSubject.next(json.access);
     console.log('Access token: ' + json.access);
     console.log('Refresh token: ' + json.refresh);
   }
-  })
-  .catch(err=>{
-    console.log(err)
-  });
+  return response;
 }
 
 async function logout() {
