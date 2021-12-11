@@ -38,24 +38,30 @@ const WeatherWidget = () => {
           temperature = (temperature - 273.15) * (9/5) + 32; 
           temperature = Math.trunc(temperature);         
           setTemp(temperature);
-      });
-  });
 
-  if(temp < 40) {
-    const auth_token = localStorage.getItem("access");
-    fetch('http://localhost:8000/alerts', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        authorization: auth_token
-      },
-      body: {
-        body: `Alert! The temperature dropped to 40 degree farenheit.
-         Please keep in mind that this temperature is hazardous for most plants.`,
-        to: "ananaziz98@gmail.com"
-      }
-    })
-  }
+          if(temperature < 40) {
+            const auth_token = localStorage.getItem("access-token");
+            fetch('http://localhost:8000/alerts', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+                authorization: auth_token
+              },
+              body: {
+                body: `Alert! The temperature dropped to 40 degree farenheit.
+                 Please keep in mind that this temperature is hazardous for most plants.`,
+                to: "ananaziz98@gmail.com"
+              }
+            })
+            .catch(err=>{
+              console.log(err)
+            })
+          }
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+  });
 
   return (
     <div>

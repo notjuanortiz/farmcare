@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 const LoginPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [validate, setValidate] = useState(true);
+  const [validate, setValidate] = useState(false);
   const history = useHistory();
   const onChangeEmail = (e) => {
     const email = e.target.value;
@@ -25,17 +25,16 @@ const LoginPage = () => {
 
   const authenticate = (e) => {
     e.preventDefault();
-    AuthenticationService.login(email, password)
-      .then(function (response) {
-        let resp = response.status;
-        console.log("response code: ", resp);
-        if(resp != '200') {
-          history.push("/home-page");
-        }
-        else {
-          setValidate(true);
-        }
-      });
+    let resp = AuthenticationService.login(email, password)
+    .then(() => {
+      console.log("what is code ",resp);
+      if(resp != '200') {
+        history.push("/home-page");
+      }
+      else {
+        setValidate(true);
+      }
+    })
   };
 
   return (
