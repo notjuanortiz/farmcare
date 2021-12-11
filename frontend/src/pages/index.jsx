@@ -27,8 +27,7 @@ const LandingPage = () => {
               farmers about their crop and help increase annual yield by providing key insights
                that can be leveraged quickly and efficiently. These insights are delivered to 
                the farmers via timely smart alerts that allow them to make better real time 
-               decisions and maximize profit. And it’s all done through a simple, beautiful,
-                and easy-to-use interface. 
+               decisions and maximize profit.
            </div>
 
            <Link to="/sign-up" className="btn btn-lg btn-success mt-3 mb-5 m-1">Sign up</Link>
@@ -38,25 +37,31 @@ const LandingPage = () => {
               <tbody>
                 <tr>
                   <td>
-                    <div className="text-muted">Farm more acres of land</div>
+                      <img style={{height: '50px', width: '50px'}} src='lp_icons/672-farmer-outline.svg' />
+                      <div className="text-muted">Farm more acres of land</div>
                   </td>
                   <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/1510-reading-babies-outline.svg' />
                     <div className="text-muted">Spend less time learning</div>
                   </td>
                 </tr>
                 <tr>
                   <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/945-dividends-outline.svg' />
                     <div className="text-muted">Improve yields and profitability</div>
                   </td>
                   <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/426-brain-outline.svg' />
                     <div className="text-muted">Make wiser decisions and stay ahead of competition</div>
                   </td>
                 </tr>
                 <tr>
                   <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/815-snow-flake-outline.svg' />
                     <div className="text-muted">Identify upcoming weather problems before they affect yield</div>
                   </td>
                   <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/46-timer-stopwatch-outline.svg' />
                     <div className="text-muted">Save time and gain peace of mind</div>
                   </td>
                 </tr>  
