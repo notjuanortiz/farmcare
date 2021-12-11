@@ -41,15 +41,16 @@ class UserCrop(models.Model):
     '''
     An intermediate table that enables a many-to-many relationship between user and crop
     '''
-    user = models.ForeignKey(FarmcareUser, on_delete=CASCADE)
+    user = models.ForeignKey(FarmcareUser, on_delete=CASCADE, primary_key=True)
     crop = models.ForeignKey(Crop, on_delete=CASCADE)
-    user_submitted_image = models.ImageField()
+    user_submitted_image = models.CharField(max_length=255)
 
     def __str__(self):
         return self.email
     class Meta:
+       # managed = False
         constraints = [
             # composite key constraint
-            UniqueConstraint(fields=['user', 'crop'], name='unique_user_crop')
+            UniqueConstraint(fields=['user', 'crop'], name='user_crop_id')
         ]
         db_table = 'users_crops'

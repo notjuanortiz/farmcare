@@ -3,8 +3,10 @@ from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-from users.serializers import UserSerializer
+from crops.models import Crop
+from users.serializers import UserSerializer, UserCropSerializer
 from users.models import FarmcareUser, UserCrop
+from users.storage import ImageBBStorage
 
 
 class UserViewSet(ModelViewSet):
@@ -38,8 +40,8 @@ class UserDashboardView(RetrieveAPIView):
             response = {
                 'user': [{
                     'first_name': user.first_name,
-                    'crops': user.crops.all()[:10].values('name'),
-                    #'crops_with_diseases' : user.crops.filter(disease__isnull=False).count(),
+                    'crops': user.crops.all()[:10],
+                    # 'crops_with_diseases' : user.crops.filter(disease__isnull=False).count(),
                     'zipcode': user.zipcode,
                 }]
             }
@@ -51,9 +53,34 @@ class UserDashboardView(RetrieveAPIView):
         return Response(response, status=status_code)
 
 
-class CreateUserCropView(CreateAPIView):
+class AddUserCropView(CreateAPIView):
     '''
-    Used to create user-crop relationships
+    Used to create user-crop relationships.
+    The uploaded crop image is stored externally and the url to that image is stored on-premise.
+    This alleviates us from having to serve files ourselves.
     '''
-    serializer_class = UserCrop
     permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        crop_name = request.data['name'].lower()
+        crop_image = request.data['image']
+
+        storage = ImageBBStorage()
+        image_url = storage.save(crop_name, crop_image)
+        print(crop_name)
+
+        crop, created = Crop.objects.get_or_create(
+            name=crop_name,
+            image=image_url
+        )
+
+        user_crop: UserCrop = UserCrop(
+            user=request.user,
+            crop=crop,
+            user_submitted_image=image_url
+        )
+
+        user_crop.save()
+
+        serializer = UserCropSerializer(user_crop)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

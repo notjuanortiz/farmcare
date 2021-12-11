@@ -24,7 +24,7 @@ from rest_framework_simplejwt.views import (
 )
 
 from alerts.views import CreateEmailAlertView
-from users.views import UserDashboardView
+from users.views import UserViewSet, UserDashboardView, AddUserCropView
 from crops.views import CropViewSet
 
 # Loads admin.py for all apps
@@ -33,6 +33,7 @@ admin.autodiscover()
 
 router = DefaultRouter()
 router.register(r'crops', CropViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -41,7 +42,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('dashboard', UserDashboardView.as_view(), name='dashboard'),
-    path('alerts/email/', CreateEmailAlertView.as_view(), name='alert_email')
+    path('alerts/email/', CreateEmailAlertView.as_view(), name='alert_email'),
+    path('users/add_crop/', AddUserCropView.as_view(), name='create_user_crop')
 ]
 
 urlpatterns += router.urls
