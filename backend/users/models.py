@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.db.models.constraints import UniqueConstraint
 from django.db.models.deletion import CASCADE
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext as _
 from django.utils import timezone
 
 from .managers import FarmcareUserManager
