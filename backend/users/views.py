@@ -7,6 +7,7 @@ from crops.models import Crop
 from users.serializers import UserSerializer, UserCropSerializer
 from users.models import FarmcareUser, UserCrop
 from users.storage import ImageBBStorage
+from crops.crop_lens import crop_lens
 
 
 class UserViewSet(ModelViewSet):
@@ -81,6 +82,16 @@ class AddUserCropView(CreateAPIView):
         )
 
         user_crop.save()
-
+        detected_name = crop_lens.crop_lens(image_url)
+        temp = detected_name.split('__')
+        detected_crop = temp[0]
+        disease = temp[1].replace('_', ' ')
         serializer = UserCropSerializer(user_crop)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(
+            {
+                'data' : serializer.data,
+                'detected_crop': detected_crop,
+                'disease' : disease
+            },
+            status=status.HTTP_201_CREATED)
