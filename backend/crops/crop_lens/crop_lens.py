@@ -2,7 +2,6 @@ import os
 from os import listdir
 import cv2 as cv
 import numpy as np
-import pickle 
 import tensorflow as tf 
 from tensorflow import keras
 from keras.preprocessing.image import img_to_array
@@ -17,7 +16,7 @@ default_image_size = (128,128)
 height = 128
 width = 128
 directory_root = './plant_village'
-croplens_directory = os.path.abspath('./backend/crops/crop_lens')
+croplens_directory = os.path.abspath('./crops/crop_lens')
 
 def convert_image_to_array(image):
     try: 
@@ -205,14 +204,14 @@ def crop_lens(imagepath):
 
     # to train model again 
     # model = train_again()
-    model = load_model(croplens_directory + '/saved_model')
+    model = load_model(croplens_directory + '\saved_model')
     # # there is a checkpoint warning, -> because we are only using the model on testing data so we can ignore the warning 
     # checkpoint = tf.train.Checkpoint(model)
     # save_path = checkpoint.save('./tmp/training_checkpoints')    
     # checkpoint.restore(save_path).assert_consumed()
     # evaluate restored model 
 
-    img = load_image('https://i.ibb.co/C7L0c5c/apple-leaf.jpg')
+    img = load_image(imagepath)
 
 
     print(img.shape)
@@ -234,5 +233,5 @@ def crop_lens(imagepath):
     return label_list[np.argmax(score)]
 
 # extract_features()
-crop_name = crop_lens("testimage.png")
-print(crop_name)
+# crop_name = crop_lens("testimage.png")
+# print(crop_name)
