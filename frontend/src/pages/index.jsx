@@ -1,129 +1,75 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import logo from '../logo.svg';
+import {Link,  useHistory} from "react-router-dom";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   Container,
   Card,
   Row,
-  Button
+  Button,
+  Table
 } from 'react-bootstrap';
 import MainNavbar from '../components/mainNavbar';
-import WeatherWidget from "../components/weatherWidget";
-import CropCarouselWidget from "../components/cropCarouselWidget";
-import Upload from "../components/imageUpload";
-import { useRef, useState, useCallback } from "react";
-import Webcam from "react-webcam";
 
-const videoConstraints = {
-    width: 720,
-    height: 360,
-    facingMode: "user"
-  };
-
-const Home = () => {
-    const [isCaptureEnable, setCaptureEnable] = useState(null);
-    const webcamRef = useRef(null);
-    const [url, setUrl] = useState(null);
-    const capture = useCallback(() => {
-        const imageSrc = webcamRef.current?.getScreenshot();
-        if (imageSrc) {
-        setUrl(imageSrc);
-        }
-    }, [webcamRef]);    
+const LandingPage = () => { 
 
       return (
         <div className="App">    
           <MainNavbar></MainNavbar>
     
           <Container>
-            <Row className="justify-content-md-center">
-              <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
-                <WeatherWidget></WeatherWidget>
-              </Card>
-    
-              <Card style={{width: '20rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
-                <Card.Body>
-                    <Card.Title>
-                      <div style={{fontSize: '100px', color: '#015249'}}>13</div>
-                    </Card.Title>
-                    <Card.Subtitle style={{fontSize: '20px', color: '#015249'}}>crops have been infected</Card.Subtitle>
-                </Card.Body>
-              </Card>
-            </Row>
-    
-            <br></br>
-    
-            <Row className="justify-content-md-center">
-              <Card style={{width: '25rem', borderColor: '#57BC90', borderWidth: '5px', margin: "10px"}}>
-                <Card.Body>
-                  <Card.Title style={{color: '#015249'}}>My Crop</Card.Title>
-                  <CropCarouselWidget></CropCarouselWidget>
-                </Card.Body>
-              </Card>
-              
-              
-            </Row>
+           <h1 className="mb-4">Manage, Discover, Grow</h1>
+           <div style={{width: "50%", margin: "auto"}}>
+              Our goal at FarmCare is to provide an all-in-one application that makes farming 
+              more efficient, improves yield, and delivers increased profit. Our approach is 
+              different as we are helping local farmers get started by using Machine Learning 
+              and Computer Vision. With these technologies, FarmCare is there to educate 
+              farmers about their crop and help increase annual yield by providing key insights
+               that can be leveraged quickly and efficiently. These insights are delivered to 
+               the farmers via timely smart alerts that allow them to make better real time 
+               decisions and maximize profit.
+           </div>
 
-            <Row>
-            <Card style={{borderWidth: '0px', width: '15rem', margin: "10px"}}>
-                <Card.Body>
-                    <div className='mb-3'>
-                        <Upload></Upload>
-                    </div>
-                    
-                    <div className='mb-3'>
-                        {isCaptureEnable || (
-                            <Button variant="success" size="lg" onClick={() => setCaptureEnable(true)}>Open Camera</Button>
-                        )}
-                        {isCaptureEnable && (
-                            <>
-                            <div>
-                                <Button variant="success" size="lg" onClick={() => setCaptureEnable(false)}>Close Camera</Button>
-                            </div>
-                            <div>
-                                <Webcam
-                                audio={false}
-                                width={540}
-                                height={360}
-                                ref={webcamRef}
-                                screenshotFormat="image/jpeg"
-                                videoConstraints={videoConstraints}
-                                />
-                            </div>
-                            <Button variant="success" size="lg" className='mb-3' onClick={capture}>Capture</Button>
-                            </>
-                        )}
-                        {url && (
-                            <>
-                            <div>
-                                <Button variant="success" size="lg" className='mb-3'
-                                    onClick={() => {
-                                        setUrl(null);
-                                    }}
-                                >
-                                    Remove photo
-                                </Button>
-                            </div>
-                            <div>
-                                <img src={url} alt="Screenshot" />
-                            </div>
-                            </>
-                        )}
-                    </div>
+           <Link to="/sign-up" className="btn btn-lg btn-success mt-3 mb-5 m-1">Sign up</Link>
+           <Link to="/login" className="btn btn-lg btn-success mt-3 mb-5 m-1">Login</Link>
 
-                    <div>
-                        <Button variant="success" size="lg">
-                            Profile Settings
-                        </Button>  
-                    </div>       
-                </Card.Body>
-              </Card>
-            </Row>
+           <Table borderless style={{width: "50%", margin: "auto"}} className="mt-5">
+              <tbody>
+                <tr>
+                  <td>
+                      <img style={{height: '50px', width: '50px'}} src='lp_icons/672-farmer-outline.svg' />
+                      <div className="text-muted">Farm more acres of land</div>
+                  </td>
+                  <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/1510-reading-babies-outline.svg' />
+                    <div className="text-muted">Spend less time learning</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/945-dividends-outline.svg' />
+                    <div className="text-muted">Improve yields and profitability</div>
+                  </td>
+                  <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/426-brain-outline.svg' />
+                    <div className="text-muted">Make wiser decisions and stay ahead of competition</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/815-snow-flake-outline.svg' />
+                    <div className="text-muted">Identify upcoming weather problems before they affect yield</div>
+                  </td>
+                  <td>
+                    <img style={{height: '50px', width: '50px'}} src='lp_icons/46-timer-stopwatch-outline.svg' />
+                    <div className="text-muted">Save time and gain peace of mind</div>
+                  </td>
+                </tr>  
+              </tbody>
+            </Table>
           </Container>
         </div>
       );
     }
 
-export default Home;
+export default LandingPage;

@@ -16,13 +16,34 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
-from rest_framework_simplejwt import views as jwt_views
+from rest_framework.routers import DefaultRouter
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+from alerts.views import CreateEmailAlertView
+from users.views import UserViewSet, UserDashboardView, AddUserCropView
+from crops.views import CropViewSet
+
+# Loads admin.py for all apps
+# Lets us customize admin panel without needing to explicitly define routes
 admin.autodiscover()
 
+router = DefaultRouter()
+router.register(r'crops', CropViewSet)
+router.register(r'users', UserViewSet)
+
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    url('', include('core.urls')),
-    path('auth/', include('dj_rest_auth.urls')),
-    path('auth/registration/', include('dj_rest_auth.registration.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'auth/', include('dj_rest_auth.urls')),
+    url(r'auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('dashboard', UserDashboardView.as_view(), name='dashboard'),
+    path('alerts/email/', CreateEmailAlertView.as_view(), name='alert_email'),
+    path('users/add_crop/', AddUserCropView.as_view(), name='create_user_crop')
 ]
+
+urlpatterns += router.urls

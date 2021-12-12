@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import '../styles/cropProfile.css';
 
-const CropProfile = () => {
+const CropProfilePage = () => {
   return (
     <div>
         <MainNavbar></MainNavbar>
@@ -56,4 +56,4 @@ const CropProfile = () => {
     </div>
   );
 }
-export default CropProfile;
+export default CropProfilePage;
