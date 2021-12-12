@@ -1,32 +1,23 @@
-from functools import total_ordering
-from logging import root
 import os
 from os import listdir
 import cv2 as cv
-from PIL.Image import Image
-from keras import preprocessing
-from keras.backend_config import image_data_format
 import numpy as np
 import pickle 
 import tensorflow as tf 
-import matplotlib.pyplot as plt
 from tensorflow import keras
-from keras.preprocessing import image
-from keras.preprocessing.image import ImageDataGenerator, img_to_array
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Activation, Dropout, Flatten, Dense
-from tensorflow.keras.models import Sequential, save_model, load_model
-from sklearn.preprocessing import LabelBinarizer
-from tensorflow.keras.layers import BatchNormalization
-from keras.layers.convolutional import Conv2D
-from keras.layers.convolutional import MaxPooling2D
+from keras.preprocessing.image import img_to_array
+
+from tensorflow.keras.models import save_model, load_model
 from numpy.random import seed
-seed(1)
+import random
+
+seed(random.randint(1,10000))
 
 default_image_size = (128,128)
 height = 128
 width = 128
 directory_root = './plant_village'
+croplens_directory = os.path.abspath('./backend/crops/crop_lens')
 
 def convert_image_to_array(image):
     try: 
@@ -189,26 +180,43 @@ def train_again():
 
     return model 
 
+def load_image(link):
+    import requests
+    import shutil
+    import os
+    
+    _, ext = os.path.splitext(link)
+    
+    r = requests.get(link, stream=True)
+    with open('temp.' + ext, 'wb') as f:
+        r.raw.decode_content = True
+        shutil.copyfileobj(r.raw, f)
+        
+    img = keras.preprocessing.image.load_img('temp.' + ext, color_mode = 'grayscale', 
+        target_size = (128, 128, 1), 
+        interpolation = 'nearest')
+    return keras.preprocessing.image.img_to_array(img)
 
-def crop_lens():
+def crop_lens(imagepath):
+    '''
+    Returns predicted crop name
+    '''
     label_list = ['Apple__Apple_scab', 'Apple__Black_rot', 'Apple__Cedar_apple_rust', 'Apple__healthy', 'Blueberry__healthy', 'Cherry_(including_sour)__healthy', 'Cherry_(including_sour)___Powdery_mildew', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 'Corn_(maize)___Common_rust_', 'Corn_(maize)___healthy', 'Corn_(maize)___Northern_Leaf_Blight', 'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___healthy', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Orange___Haunglongbing_(Citrus_greening)']
 
     # to train model again 
     # model = train_again()
-    model = load_model('./saved_model')
-    
+    model = load_model(croplens_directory + '/saved_model')
     # # there is a checkpoint warning, -> because we are only using the model on testing data so we can ignore the warning 
     # checkpoint = tf.train.Checkpoint(model)
     # save_path = checkpoint.save('./tmp/training_checkpoints')    
     # checkpoint.restore(save_path).assert_consumed()
     # evaluate restored model 
-    
-    img = keras.preprocessing.image.load_img(
-        "./plant_village/Apple___healthy/1477ac33-4284-4db3-9a91-dbd61e6183e3___RS_HL_8059.JPG", 
-        color_mode = 'grayscale', 
-        target_size = (128, 128, 1), 
-        interpolation = 'nearest'
-    )
+
+    img = load_image('https://i.ibb.co/C7L0c5c/apple-leaf.jpg')
+
+
+    print(img.shape)
+
     img_array = keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0) 
     # loss, acc = model.evaluate(img_array)
@@ -226,5 +234,5 @@ def crop_lens():
     return label_list[np.argmax(score)]
 
 # extract_features()
-crop_name = crop_lens()
+crop_name = crop_lens("testimage.png")
 print(crop_name)
