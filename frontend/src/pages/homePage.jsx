@@ -100,7 +100,7 @@ const HomePage = () => {
                           </Button>
                       </div>
                       <div>
-                          <img src={url} alt="Screenshot" />
+                          <img src={url} style={{height: "15%", width: "15%"}} alt="Screenshot" />
                       </div>
                       </>
                   )}

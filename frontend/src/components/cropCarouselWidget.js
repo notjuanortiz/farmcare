@@ -8,12 +8,30 @@ import {
   Nav,
   Carousel
 } from 'react-bootstrap';
+import { useState } from "react";
 
 const CropCarouselWidget = () => {
+  const [crop, setCrop] = useState("");
+  const auth_token = localStorage.getItem("access-token");
+  fetch('http://localhost:8000/dashboard', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${auth_token}`
+      }
+    })
+    .then(response => { 
+      console.log("user info: ", response);
+      let myCrops = response.user.crops;
+      setCrop(myCrops)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+
     return (
-      <div>
-       [Carousel Widget]
-      </div>
+      <>
+       {crop}
+      </>
     );
 }
 

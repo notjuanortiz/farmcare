@@ -41,16 +41,16 @@ const WeatherWidget = () => {
 
           if(temperature < 40) {
             const auth_token = localStorage.getItem("access-token");
-            fetch('http://localhost:8000/alerts', {
+            fetch('http://localhost:8000/alerts/email', {
               method: 'POST',
               headers: {
                 'content-type': 'application/json',
-                authorization: auth_token
+                'Authorization': `Bearer ${auth_token}`
               },
               body: {
-                body: `Alert! The temperature dropped to 40 degree farenheit.
+                message: `Alert! The temperature dropped to 40 degree farenheit.
                  Please keep in mind that this temperature is hazardous for most plants.`,
-                to: "ananaziz98@gmail.com"
+                recipient: "ananaziz98@gmail.com"
               }
             })
             .catch(err=>{
