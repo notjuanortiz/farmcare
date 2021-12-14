@@ -20,9 +20,10 @@ const CropCarouselWidget = () => {
       }
     })
     .then(response => { 
-      console.log("user info: ", response);
+      console.log("user info: ", response.user);
       let myCrops = response.user.crops;
-      setCrop(myCrops)
+      setCrop(myCrops);
+      console.log("crop profile: ", response)
     })
     .catch(err=>{
       console.log(err)

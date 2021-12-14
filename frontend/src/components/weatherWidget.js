@@ -22,7 +22,6 @@ const WeatherWidget = () => {
       .then(res => res.json())
       .then(result => { 
           let description = result.weather[0].description;
-          console.log("desc",description);
           setDesc(description);
 
           let path = `weather_icons/${result.weather[0].icon}.png`;

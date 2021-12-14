@@ -13,27 +13,26 @@ class Upload extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
   handleChange(event) {
-    this.setState({
-      file: URL.createObjectURL(event.target.files[0])
-    })
-  }
+    // this.setState({
+    //   file: URL.createObjectURL(event.target.files[0])
+    // });
 
-  fileUpload() {
     let randomNum = Math.floor(Math.random()*90000) + 10000;
     const auth_token = localStorage.getItem("access-token");
     fetch('http://localhost:8000/users/add_crop/', {
       method: 'POST',
       headers: {
-        'Content-Type' : 'image/jpeg',
+        'Content-Type' : 'multipart/form-data; boundary=63c5979328c44e2c869349443a94200e',
         'Authorization': `Bearer ${auth_token}`
       },
       body: {
-        name: `image${randomNum}`,
-        image: this.file
+        name: "image12345",
+        image: event.target.files[0]
       }
     })
-    .catch(err=>{
-      console.log("file not uploaded: ",err)
+    .then(resp=>{
+      console.log("file not uploaded: ", resp);
+      console.log("file here: ", event.target.files[0])
     })
   }
 
