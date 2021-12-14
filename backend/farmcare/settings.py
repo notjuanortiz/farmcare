@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'corsheaders',
-    'core',
     'users',
     'crops',
     'alerts',
