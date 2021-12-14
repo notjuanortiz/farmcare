@@ -1,3 +1,4 @@
+from django.db.models import F
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, get_object_or_404
@@ -35,13 +36,28 @@ class UserDashboardView(RetrieveAPIView):
         return obj
 
     def get(self, request):
+        '''
+        Handles GET request
+        '''
         try:
             user = request.user
             status_code = status.HTTP_200_OK
+
+            # fetch all crops associated with the user who sent the request
+            crops = UserCrop.objects\
+                            .filter(user=request.user)\
+                            .select_related('user')\
+                            .prefetch_related('crops')\
+                            .values(
+                                name=F('crop__name'),
+                                image_url=F('user_submitted_image')
+                            )
+
+            # construct the json response
             response = {
                 'user': [{
                     'first_name': user.first_name,
-                    'crops': user.crops.all()[:10],
+                    'crops': crops,
                     # 'crops_with_diseases' : user.crops.filter(disease__isnull=False).count(),
                     'zipcode': user.zipcode,
                 }]
@@ -66,13 +82,14 @@ class AddUserCropView(CreateAPIView):
         crop_name = request.data['name'].lower()
         crop_image = request.data['image']
 
+        # upload image to 3rd-party file system
         storage = ImageBBStorage()
         image_url = storage.save(crop_name, crop_image)
         print(crop_name)
 
+        # store crop to with 3rd-party url
         crop, created = Crop.objects.get_or_create(
             name=crop_name,
-            image=image_url
         )
 
         user_crop: UserCrop = UserCrop(
@@ -82,16 +99,19 @@ class AddUserCropView(CreateAPIView):
         )
 
         user_crop.save()
+
+        # classify crop and disease
         detected_name = crop_lens.crop_lens(image_url)
         temp = detected_name.split('__')
         detected_crop = temp[0]
         disease = temp[1].replace('_', ' ')
+
         serializer = UserCropSerializer(user_crop)
 
         return Response(
             {
-                'data' : serializer.data,
+                'data': serializer.data,
                 'detected_crop': detected_crop,
-                'disease' : disease
+                'disease': disease
             },
             status=status.HTTP_201_CREATED)

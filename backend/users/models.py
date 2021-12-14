@@ -18,7 +18,7 @@ class FarmcareUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=30, null=True)
     last_name = models.CharField(max_length=30, null=True)
     zipcode = models.IntegerField(default=11367)
-    crops = models.ManyToManyField(Crop, through='UserCrop')
+    crops = models.ManyToManyField(Crop, related_name='crops', through='UserCrop')
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -41,12 +41,13 @@ class UserCrop(models.Model):
     '''
     An intermediate table that enables a many-to-many relationship between user and crop
     '''
-    user = models.ForeignKey(FarmcareUser, on_delete=CASCADE, primary_key=True)
+    user = models.ForeignKey(FarmcareUser, on_delete=CASCADE)
     crop = models.ForeignKey(Crop, on_delete=CASCADE)
     user_submitted_image = models.CharField(max_length=255)
 
     def __str__(self):
         return self.email
+
     class Meta:
        # managed = False
         constraints = [
